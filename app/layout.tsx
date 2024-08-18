@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
+import Navbar from "./components/Navbar";
+import Provider from "./components/Provider";
+import Footer from "./components/Footer";
+
+const customFont = localFont({
+  src: "../public/fonts/Virgil.ttf",
+  variable: "--font-secondary",
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`container ${inter.className} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
+      >
+        <Provider>
+          <Navbar />
+          <main className="mt-16">{children}</main>
+          <Footer />
+        </Provider>
+      </body>
     </html>
   );
 }

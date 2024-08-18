@@ -1,0 +1,58 @@
+import React from "react";
+import { allBlogs } from "contentlayer/generated";
+import { notFound } from "next/navigation";
+import { format } from "date-fns";
+import Image from "next/image";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import Tags from "../components/Tags";
+import type { Metadata } from "next";
+import { MDXComponents } from "../components/MDXComponents";
+
+export const generateStaticParams = async () =>
+  allBlogs.map((post) => ({ slug: post._raw.flattenedPath }));
+
+export const generateMetadata = ({
+  params,
+}: {
+  params: { id: string };
+}): Metadata => {
+  const post = allBlogs.find((post) => post._raw.flattenedPath === params.id);
+  if (!post) throw new Error(`Post not found for slug: ${params.id}`);
+  return {
+    title: post.title,
+    description: post.summary,
+    authors: [{ name: "Pavan Bhaskar", url: "https://pavanbhaskar.com" }],
+  };
+};
+
+const BlogIDPage = ({ params }: { params: { id: string } }) => {
+  const post = allBlogs.find((post) => post._raw.flattenedPath === params.id);
+  if (!post) {
+    notFound();
+  }
+
+  const MDXContent = useMDXComponent(post.body.code);
+
+  return (
+    <article className="prose lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
+      <div className="relative h-96 not-prose rounded-md overflow-hidden mb-4 bg-slate-400">
+        <Image
+          src={post.imageUrl}
+          fill
+          alt={`${post.title} cover pic`}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <h1>{post.title}</h1>
+
+      <time>{`Posted on ${format(new Date(post.date), "dd, LLL uuuu")}`}</time>
+
+      <Tags list={post.tags} className="my-2" />
+
+      <MDXContent components={MDXComponents} />
+    </article>
+  );
+};
+
+export default BlogIDPage;
