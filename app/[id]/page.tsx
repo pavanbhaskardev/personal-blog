@@ -17,11 +17,30 @@ export const generateMetadata = ({
   params: { id: string };
 }): Metadata => {
   const post = allBlogs.find((post) => post._raw.flattenedPath === params.id);
-  if (!post) throw new Error(`Post not found for slug: ${params.id}`);
+  if (!post) {
+    return {};
+  }
+
   return {
     title: post.title,
     description: post.summary,
     authors: [{ name: "Pavan Bhaskar", url: "https://pavanbhaskar.com" }],
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      url: "https://blog.pavanbhaskar.com",
+      siteName: "Blog",
+      images: [
+        {
+          url: `/og?title=${encodeURIComponent(post.title)}`,
+          height: 630,
+          width: 1200,
+          alt: `${post.title} og image`,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
   };
 };
 
