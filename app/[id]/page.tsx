@@ -32,7 +32,7 @@ export const generateMetadata = ({
       siteName: "Blog",
       images: [
         {
-          url: `/og?title=${encodeURIComponent(post.title)}`,
+          url: `/api/og?title=${encodeURIComponent(post.title)}`,
           height: 630,
           width: 1200,
           alt: `${post.title} og image`,
