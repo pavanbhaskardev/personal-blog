@@ -1,5 +1,14 @@
 import Image from "next/image";
 import type { MDXComponents as MDXComponentsType } from "mdx/types";
+import Link from "next/link";
+
+// this will generate a ID
+function generateId(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
 
 export const MDXComponents: MDXComponentsType = {
   img: ({ src, alt }) => {
@@ -12,6 +21,32 @@ export const MDXComponents: MDXComponentsType = {
           className="w-full h-full object-cover"
         />
       </div>
+    );
+  },
+  h2: ({ children }) => {
+    const id = generateId(`${children?.toString()}`);
+
+    return (
+      <h2 id={id} className="hover:!text-text/80 group">
+        <Link href={`#${id}`} className="not-prose flex gap-2 items-center">
+          {children}
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="size-6 invisible group-hover:visible"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+            />
+          </svg>
+        </Link>
+      </h2>
     );
   },
 };

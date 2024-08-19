@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply bg-background text-text selection:bg-primary selection:text-background;
+    @apply bg-background text-text selection:bg-primary selection:text-background scroll-m-20 scroll-smooth;
   }
 }
 

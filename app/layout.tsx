@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description:
     "Hi there!, i'm pavan i'm a developer & designer i write my blogs here. check it out!",
   authors: [{ name: "Pavan Bhaskar", url: "https://pavanbhaskar.com" }],
+  metadataBase: new URL("https://blog.pavanbhaskar.com"),
   openGraph: {
     title: "Blog🤙",
     description:
