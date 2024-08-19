@@ -5,7 +5,7 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const title = searchParams.get("title");
+  const title = decodeURIComponent(searchParams.get("title") || "");
 
   const fontData = await fetch(
     new URL("../../../public/fonts/Virgil.ttf", import.meta.url)
