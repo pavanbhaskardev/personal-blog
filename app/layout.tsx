@@ -53,7 +53,9 @@ export default function RootLayout({
       >
         <Provider>
           <Navbar />
-          <main className="mt-16">{children}</main>
+          <main className="py-16 w-full overflow-x-hidden overflow-y-hidden">
+            {children}
+          </main>
           <Footer />
         </Provider>
       </body>

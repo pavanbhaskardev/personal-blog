@@ -53,7 +53,7 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <article className="prose lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
+    <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
       <div className="relative h-96 not-prose rounded-md overflow-hidden mb-4 bg-slate-400">
         <Image
           src={post.imageUrl}

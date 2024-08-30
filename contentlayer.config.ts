@@ -1,6 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkGfm from "remark-gfm";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 
 export const Blog = defineDocumentType(() => ({
   name: "Blog",
@@ -25,10 +26,20 @@ export const Blog = defineDocumentType(() => ({
   },
 }));
 
-export default makeSource({
+const rehypePrettyCodeOptions: Partial<Options> = {
+  // use a prepackaged theme
+  theme: "slack-dark",
+};
+
+const contentLayerConfig = makeSource({
   contentDirPath: "content",
   documentTypes: [Blog],
   mdx: {
-    remarkPlugins: [remarkUnwrapImages, remarkGfm],
+    remarkPlugins: [remarkGfm, remarkUnwrapImages],
+    rehypePlugins: [
+      [rehypePrettyCode, rehypePrettyCodeOptions] as unknown as any,
+    ],
   },
 });
+
+export default contentLayerConfig;

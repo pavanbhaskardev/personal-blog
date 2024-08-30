@@ -4,11 +4,14 @@ import Link from "next/link";
 import Tags from "./components/Tags";
 
 export default function Home() {
-  console.log({ allBlogs });
+  // sorting blog is descending order
+  const sortedBlogs = allBlogs.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   return (
-    <section className="grid sm:grid-cols-2">
-      {allBlogs.map((details) => (
+    <section className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
+      {sortedBlogs.map((details) => (
         <div key={details._id}>
           <div className="relative h-80 w-full rounded-md overflow-hidden bg-gray-400">
             <Image
