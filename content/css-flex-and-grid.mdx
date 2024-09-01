@@ -145,6 +145,24 @@ The default behavior of <mark>flex is it aligns elements in horizontal direction
 
 Nice our alignment issue is fixed, this is because now we've 2 elements inside our container i.e image & div so those two appear side by side, the div again has 2 elements inside it.
 
+In cases when you want to change the direction when using flex there is property called **flex-direction**
+
+```css
+.container {
+  display: flex;
+
+  /* this will change flex direction to vertical */
+  flex-direction: column;
+
+  /* there are some other options also */
+  /* row is default which means horizontal */
+  /* row-reverse is means horizontal direction and elements are reversed */
+  /* column is means vertical direction */
+  /* column-reverse is means vertical direction and elements are reversed */
+  flex-direction: row | row-reverse | column | column-reverse;
+}
+```
+
 Let's explore the different alignment options in flex there are 2 other properties
 
 - **align-items**: this aligns stuff in vertical direction
@@ -159,7 +177,7 @@ Let's explore the different alignment options in flex there are 2 other properti
   align-items: center;
 
   /* there are options like flex-end, flex-start which will align content top, bottom */
-  /* align-items: center | flex-start | flex-end;  */
+  align-items: center | flex-start | flex-end;
 }
 ```
 
@@ -179,7 +197,7 @@ Let's explore the different alignment options in flex there are 2 other properti
   /* justify-content: center | start | end;  */
 
   /* there are 2 different options, these options will create space in-between the elements */
-  /* justify-content: space-between | space-around;  */
+  justify-content: space-between | space-around;
 }
 ```
 
