@@ -13,12 +13,13 @@ export default function Home() {
     <section className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
       {sortedBlogs.map((details) => (
         <div key={details._id}>
-          <div className="relative h-80 w-full rounded-md overflow-hidden bg-gray-400">
+          <div className="relative aspect-video w-full rounded-md overflow-hidden bg-gray-400">
             <Image
               fill
               src={details.imageUrl}
               className="h-full w-full object-cover"
-              alt="cover-pic"
+              alt={`${details.title} cover-pic`}
+              sizes="600px"
             />
           </div>
 

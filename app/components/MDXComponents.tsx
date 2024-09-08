@@ -13,7 +13,7 @@ function generateId(text: string) {
 export const MDXComponents: MDXComponentsType = {
   img: ({ src, alt }) => {
     return (
-      <div className="relative h-96 not-prose rounded-md overflow-hidden mb-4 bg-slate-400">
+      <div className="relative aspect-video not-prose rounded-md overflow-hidden mb-4 bg-slate-400">
         <Image
           src={`${src}`}
           fill

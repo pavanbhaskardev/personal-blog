@@ -1,0 +1,13 @@
+figcaption[data-rehype-pretty-code-title] {
+  padding: 0.5rem 1.3333333em;
+  background-color: #bbbbbb;
+  color: #181818;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+figure[data-rehype-pretty-code-figure]:has(figcaption) pre {
+  /* Your styles for the pre element */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

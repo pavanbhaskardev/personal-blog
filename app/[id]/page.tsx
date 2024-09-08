@@ -7,6 +7,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import Tags from "../components/Tags";
 import type { Metadata } from "next";
 import { MDXComponents } from "../components/MDXComponents";
+import Link from "next/link";
 
 export const generateStaticParams = async () =>
   allBlogs.map((post) => ({ slug: post._raw.flattenedPath }));
@@ -53,24 +54,33 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
-      <div className="relative h-96 not-prose rounded-md overflow-hidden mb-4 bg-slate-400">
-        <Image
-          src={post.imageUrl}
-          fill
-          alt={`${post.title} cover pic`}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <>
+      <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
+        <Link href="/">{"<- "}All Posts</Link>
 
-      <h1>{post.title}</h1>
+        <div className="relative not-prose aspect-video rounded-md overflow-hidden my-4 bg-slate-400">
+          <Image
+            src={post.imageUrl}
+            fill
+            unoptimized={post.imageUrl.includes("gif")}
+            alt={`${post.title} cover pic`}
+            className="w-full h-full object-cover"
+            sizes="800px"
+          />
+        </div>
 
-      <time>{`Posted on ${format(new Date(post.date), "dd, LLL uuuu")}`}</time>
+        <h1>{post.title}</h1>
 
-      <Tags list={post.tags} className="my-2" />
+        <time>{`Posted on ${format(
+          new Date(post.date),
+          "dd, LLL uuuu"
+        )}`}</time>
 
-      <MDXContent components={MDXComponents} />
-    </article>
+        <Tags list={post.tags} className="my-2" />
+
+        <MDXContent components={MDXComponents} />
+      </article>
+    </>
   );
 };
 
