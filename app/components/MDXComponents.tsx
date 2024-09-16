@@ -18,7 +18,7 @@ export const MDXComponents: MDXComponentsType = {
           src={`${src}`}
           fill
           alt={`${alt} cover pic`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
     );

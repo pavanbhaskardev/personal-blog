@@ -53,10 +53,18 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
 
   const MDXContent = useMDXComponent(post.body.code);
 
+  // calculates the read-time
+  const readTime = () => {
+    const contentLength = post.body.raw.toString().split("").length;
+    const time = Math.ceil(contentLength / 200);
+
+    return time;
+  };
+
   return (
     <>
       <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
-        <Link href="/">{"<- "}All Posts</Link>
+        <Link href="/">{"<-"} All Posts</Link>
 
         <div className="relative not-prose aspect-video rounded-md overflow-hidden my-4 bg-slate-400">
           <Image
@@ -71,10 +79,31 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
 
         <h1>{post.title}</h1>
 
-        <time>{`Posted on ${format(
-          new Date(post.date),
-          "dd, LLL uuuu"
-        )}`}</time>
+        <div className="flex items-center justify-between">
+          <time>{`Posted on ${format(
+            new Date(post.date),
+            "dd, LLL uuuu"
+          )}`}</time>
+
+          <span className="flex items-center gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+
+            {`${readTime()} mins`}
+          </span>
+        </div>
 
         <Tags list={post.tags} className="my-2" />
 

@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 import { NextRequest, NextResponse } from "next/server";
+import { allBlogs } from "contentlayer/generated";
+import { format } from "date-fns";
 
 export const runtime = "edge";
 
@@ -11,6 +13,8 @@ export async function GET(request: NextRequest) {
     new URL("../../../public/fonts/Virgil.ttf", import.meta.url)
   );
   const fontBuffer = await fontData.arrayBuffer();
+
+  const blogDetails = allBlogs.find((details) => details.title === title);
 
   try {
     return new ImageResponse(
@@ -24,6 +28,12 @@ export async function GET(request: NextRequest) {
           >
             {title}
           </h2>
+
+          <p tw="absolute bottom-6 right-6 text-xl">
+            {blogDetails?.date
+              ? format(new Date(blogDetails.date), "dd, LLL uuuu")
+              : ""}
+          </p>
         </div>
       ),
       {

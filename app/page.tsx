@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { allBlogs, type Blog } from "contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
 import Tags from "./components/Tags";
 
@@ -10,7 +10,7 @@ export default function Home() {
   );
 
   return (
-    <section className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
+    <section className="grid sm:grid-cols-2 gap-6">
       {sortedBlogs.map((details) => (
         <div key={details._id}>
           <div className="relative aspect-video w-full rounded-md overflow-hidden bg-gray-400">
