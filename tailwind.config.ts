@@ -19,6 +19,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         secondary: "var(--font-secondary)",
+        mono: "var(--font-geist-mono)",
       },
       colors: {
         primary: "#455CE9",

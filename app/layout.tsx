@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+
 import "./globals.css";
 import localFont from "next/font/local";
 import Navbar from "./components/Navbar";
@@ -10,8 +13,6 @@ const customFont = localFont({
   src: "../public/fonts/Virgil.ttf",
   variable: "--font-secondary",
 });
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -49,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`container ${inter.className} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
+        className={`container ${GeistSans.className} ${GeistMono.variable} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
       >
         <Provider>
           <Navbar />

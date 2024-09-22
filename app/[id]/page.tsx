@@ -63,8 +63,10 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text">
-        <Link href="/">{"<-"} All Posts</Link>
+      <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text prose-a:after:content-['↗']">
+        <Link href="/" className="after:!content-none">
+          {"<-"} All Posts
+        </Link>
 
         <div className="relative not-prose aspect-video rounded-md overflow-hidden my-4 bg-slate-400">
           <Image
@@ -90,7 +92,7 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="size-6"
             >
