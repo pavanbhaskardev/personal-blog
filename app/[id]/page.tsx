@@ -63,7 +63,7 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text prose-a:after:content-['↗']">
+      <article className="prose w-full lg:prose-xl prose-headings:font-secondary prose-gray mx-auto prose-headings:text-text prose-a:after:content-['↗'] prose-blockquote:border-primary prose-blockquote:py-1 prose-blockquote:bg-primary/10">
         <Link href="/" className="after:!content-none">
           {"<-"} All Posts
         </Link>

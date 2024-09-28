@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { MDXComponents as MDXComponentsType } from "mdx/types";
 import Link from "next/link";
+import Rating from "./Rating";
 
 // this will generate a ID
 function generateId(text: string) {
@@ -59,4 +60,5 @@ export const MDXComponents: MDXComponentsType = {
       </Link>
     );
   },
+  Rating: ({ count }) => <Rating count={count} />,
 };

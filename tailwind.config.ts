@@ -22,9 +22,9 @@ const config: Config = {
         mono: "var(--font-geist-mono)",
       },
       colors: {
-        primary: "#455CE9",
-        background: "#EEEEEE",
-        text: "#181818",
+        primary: "hsl(var(--primary))",
+        text: "hsl(var(--text))",
+        background: "hsl(var(--background))",
       },
     },
   },
