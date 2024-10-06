@@ -8,6 +8,7 @@ import Tags from "../components/Tags";
 import type { Metadata } from "next";
 import { MDXComponents } from "../components/MDXComponents";
 import Link from "next/link";
+import Views from "../components/Views";
 
 export const generateStaticParams = async () =>
   allBlogs.map((post) => ({ slug: post._raw.flattenedPath }));
@@ -82,29 +83,29 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
         <h1>{post.title}</h1>
 
         <div className="flex items-center justify-between">
-          <time>{`Posted on ${format(
-            new Date(post.date),
-            "dd, LLL uuuu"
-          )}`}</time>
+          <time>{format(new Date(post.date), "dd, LLL uuuu")}</time>
 
-          <span className="flex items-center gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
+          <div className="flex gap-4 items-center">
+            <Views slug={params.id} />
+            <span className="flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
 
-            {`${readTime()} mins`}
-          </span>
+              {`${readTime()} mins`}
+            </span>
+          </div>
         </div>
 
         <Tags list={post.tags} className="my-2" />

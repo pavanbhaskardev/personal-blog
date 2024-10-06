@@ -11,7 +11,7 @@ export default function Home() {
   );
 
   return (
-    <section className="grid sm:grid-cols-2 gap-6 lg:grid-cols-3">
+    <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-3">
       {sortedBlogs.map(({ _id, imageUrl, title, tags, url, summary, date }) => (
         <div key={_id}>
           <Link
@@ -22,6 +22,7 @@ export default function Home() {
             <Image
               fill
               src={imageUrl}
+              unoptimized={imageUrl.includes(".gif")}
               className="h-full w-full object-cover"
               alt={`${title} cover-pic`}
               sizes="600px"

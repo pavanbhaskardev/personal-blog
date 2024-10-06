@@ -6,8 +6,9 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import localFont from "next/font/local";
 import Navbar from "./components/Navbar";
-import Provider from "./components/Provider";
+import KBarProvider from "./providers/KBarProvider";
 import Footer from "./components/Footer";
+import QueryProvider from "./providers/QueryProvider";
 
 const customFont = localFont({
   src: "../public/fonts/Virgil.ttf",
@@ -52,13 +53,15 @@ export default function RootLayout({
       <body
         className={`container ${GeistSans.className} ${GeistMono.variable} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
       >
-        <Provider>
-          <Navbar />
-          <main className="py-16 w-full overflow-x-hidden overflow-y-hidden">
-            {children}
-          </main>
-          <Footer />
-        </Provider>
+        <QueryProvider>
+          <KBarProvider>
+            <Navbar />
+            <main className="py-16 w-full overflow-x-hidden overflow-y-hidden">
+              {children}
+            </main>
+            <Footer />
+          </KBarProvider>
+        </QueryProvider>
       </body>
     </html>
   );
