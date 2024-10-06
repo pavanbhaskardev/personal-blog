@@ -13,7 +13,7 @@ const config: Config = {
         DEFAULT: "1rem",
       },
       screens: {
-        DEFAULT: "64rem",
+        DEFAULT: "80rem",
       },
     },
     extend: {

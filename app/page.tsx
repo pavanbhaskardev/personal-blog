@@ -2,6 +2,7 @@ import Image from "next/image";
 import { allBlogs } from "contentlayer/generated";
 import Link from "next/link";
 import Tags from "./components/Tags";
+import { format } from "date-fns";
 
 export default function Home() {
   // sorting blog is descending order
@@ -10,29 +11,39 @@ export default function Home() {
   );
 
   return (
-    <section className="grid sm:grid-cols-2 gap-6">
-      {sortedBlogs.map((details) => (
-        <div key={details._id}>
-          <div className="relative aspect-video w-full rounded-md overflow-hidden bg-gray-400">
+    <section className="grid sm:grid-cols-2 gap-6 lg:grid-cols-3">
+      {sortedBlogs.map(({ _id, imageUrl, title, tags, url, summary, date }) => (
+        <div key={_id}>
+          <Link
+            href={url}
+            tabIndex={-1}
+            className="block relative aspect-video w-full rounded-md overflow-hidden bg-gray-400"
+          >
             <Image
               fill
-              src={details.imageUrl}
+              src={imageUrl}
               className="h-full w-full object-cover"
-              alt={`${details.title} cover-pic`}
+              alt={`${title} cover-pic`}
               sizes="600px"
             />
+          </Link>
+
+          <div className="mt-2 flex items-center justify-between">
+            <Tags list={tags} />
+
+            <time className="shrink-0 text-sm text-gray-500">
+              {format(new Date(date), "dd, LLL uuuu")}
+            </time>
           </div>
 
           <Link
-            href={details.url}
+            href={url}
             className="font-secondary text-2xl inline-block mt-2 hover:text-primary cursor-pointer transition-colors font-semibold"
           >
-            {details.title}
+            {title}
           </Link>
 
-          <p className="text-gray-500">{details.summary}</p>
-
-          <Tags list={details.tags} className="mt-1" />
+          <p className="text-gray-500">{summary}</p>
         </div>
       ))}
     </section>
