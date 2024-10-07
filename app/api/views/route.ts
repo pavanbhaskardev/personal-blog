@@ -3,8 +3,15 @@ import { viewCount } from "@/app/db/schema";
 import { NextResponse } from "next/server";
 import { allBlogs } from "@/.contentlayer/generated";
 import { eq, sql } from "drizzle-orm";
+import { Ratelimit } from "@upstash/ratelimit";
+import { redis } from "@/app/db/upstash";
 
 const allowedOrigin = "https://blog.pavanbhaskar.com";
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(1, "60 s"),
+});
 
 export async function POST(request: Request) {
   const slugDetails = await request.json();
@@ -15,6 +22,11 @@ export async function POST(request: Request) {
 
   // Extract the Origin or Referer header from the request
   const origin = headers.get("origin") || headers.get("referer") || "";
+  const requestIP = request.headers.get("x-forwarded-for") ?? "";
+  const fallbackIP =
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-real-ip") ||
+    "0.0.0.0";
 
   // Check if the origin is valid (i.e., the request is coming from your domain)
   if (!origin || !origin.startsWith(allowedOrigin)) {
@@ -28,14 +40,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "invalid slug" }, { status: 400 });
   }
 
+  const ip = `${requestIP || fallbackIP}/${slug}`;
+
   try {
+    const { success } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return NextResponse.json(
+        { message: "Too many requests!" },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": "60", // 60 seconds until they can try again
+          },
+        }
+      );
+    }
+
     const existingRecord = await db
       .select()
       .from(viewCount)
       .where(eq(viewCount.slug, slug))
       .execute();
-
-    console.log({ existingRecord });
 
     if (existingRecord.length > 0) {
       await db
