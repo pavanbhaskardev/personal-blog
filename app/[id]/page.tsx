@@ -57,7 +57,7 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
   // calculates the read-time
   const readTime = () => {
     const contentLength = post.body.raw.toString().split("").length;
-    const time = Math.ceil(contentLength / 200);
+    const time = Math.ceil(contentLength / 350);
 
     return time;
   };

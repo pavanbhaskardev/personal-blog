@@ -6,8 +6,6 @@ import { eq, sql } from "drizzle-orm";
 import { Ratelimit } from "@upstash/ratelimit";
 import { redis } from "@/app/db/upstash";
 
-const allowedOrigin = "https://blog.pavanbhaskar.com";
-
 const ratelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(1, "60 s"),
@@ -20,21 +18,9 @@ export async function POST(request: Request) {
   const filteredSlug = allBlogs.find(({ url }) => url === `/${slug}`);
   const headers = request.headers;
 
-  // Extract the Origin or Referer header from the request
-  const origin = headers.get("origin") || headers.get("referer") || "";
-  const requestIP = request.headers.get("x-forwarded-for") ?? "";
+  const requestIP = headers.get("x-forwarded-for") ?? "";
   const fallbackIP =
-    request.headers.get("cf-connecting-ip") ||
-    request.headers.get("x-real-ip") ||
-    "0.0.0.0";
-
-  // Check if the origin is valid (i.e., the request is coming from your domain)
-  if (!origin || !origin.startsWith(allowedOrigin)) {
-    return NextResponse.json(
-      { message: "Request not allowed from this origin" },
-      { status: 403 } // Forbidden
-    );
-  }
+    headers.get("cf-connecting-ip") || headers.get("x-real-ip") || "0.0.0.0";
 
   if (!filteredSlug) {
     return NextResponse.json({ message: "invalid slug" }, { status: 400 });
