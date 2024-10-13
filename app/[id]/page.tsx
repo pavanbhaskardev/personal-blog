@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import { MDXComponents } from "../components/MDXComponents";
 import Link from "next/link";
 import Views from "../components/Views";
+import Utterance from "../components/Utterance";
 
 export const generateStaticParams = async () =>
   allBlogs.map((post) => ({ slug: post._raw.flattenedPath }));
@@ -112,6 +113,9 @@ const BlogIDPage = ({ params }: { params: { id: string } }) => {
 
         <MDXContent components={MDXComponents} />
       </article>
+
+      {/* added utterance comments */}
+      <Utterance />
     </>
   );
 };

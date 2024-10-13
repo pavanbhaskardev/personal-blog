@@ -56,7 +56,7 @@ export default function RootLayout({
         <QueryProvider>
           <KBarProvider>
             <Navbar />
-            <main className="py-16 w-full overflow-x-hidden overflow-y-hidden">
+            <main className="pt-16 w-full overflow-x-hidden overflow-y-hidden">
               {children}
             </main>
             <Footer />
