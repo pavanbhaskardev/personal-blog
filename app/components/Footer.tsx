@@ -19,24 +19,28 @@ const Footer = () => {
         <a
           href="https://github.com/pavanbhaskardev"
           className="underline text-primary hover:text-primary/80"
+          target="_blank"
         >
           Github
         </a>
         <a
           href="https://twitter.com/pavanbhaskar234"
           className="underline text-primary hover:text-primary/80"
+          target="_blank"
         >
           Twitter
         </a>
         <a
           href="https://www.linkedin.com/in/pavan-bhaskar-challa-4a2774244/"
           className="underline text-primary hover:text-primary/80"
+          target="_blank"
         >
           LinkedIn
         </a>
         <a
           href="https://www.instagram.com/pavan_bhaskar_ch/"
           className="underline text-primary hover:text-primary/80"
+          target="_blank"
         >
           Instagram
         </a>

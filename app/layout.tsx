@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`container ${GeistSans.className} ${GeistMono.variable} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
+        className={`container font-sans ${GeistSans.variable} ${GeistMono.variable} ${customFont.variable} grid grid-rows-[1fr_auto] min-h-screen antialiased`}
       >
         <QueryProvider>
           <KBarProvider>

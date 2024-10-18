@@ -20,6 +20,7 @@ const config: Config = {
       fontFamily: {
         secondary: "var(--font-secondary)",
         mono: "var(--font-geist-mono)",
+        sans: "var(--font-geist-sans)",
       },
       colors: {
         primary: "hsl(var(--primary))",
